@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="blackjack" defaultIdMethod="native" package="Bj">
+
+	<table name="quizes" phpName="Quiz">
+
+		<behavior name="timestampable" />
+		<behavior name="soft_delete" />
+	
+		<column name="quiz_id" type="integer" size="11" required="true" primaryKey="true" autoIncrement="true" phpName="Id"/>
+		<column name="name" type="varchar" size="64" required="true"/>
+		<column name="slug" type="varchar" size="64" required="true"/>
+        <column name="description" type="clob" required="true"/>
+
+	</table>
+    
+	<table name="quiz_questions" phpName="QuizQuestion">
+	
+		<behavior name="soft_delete" />
+
+		<column name="question_id" type="integer" size="11" required="true" primaryKey="true" autoIncrement="true" phpName="Id"/>
+        <column name="quiz_id" type="integer" size="11" required="true" phpName="QuizId"/>
+		<column name="text" type="clob" required="true"/>
+
+        <foreign-key foreignTable="quizes" phpName="Quiz">
+            <reference local="quiz_id" foreign="quiz_id"/>
+        </foreign-key>
+        
+	</table>
+    
+    <table name="quiz_question_options" phpName="QuizQuestionOption">
+
+        <behavior name="soft_delete" />
+    
+        <column name="option_id" type="integer" size="11" required="true" primaryKey="true" autoIncrement="true" phpName="Id"/>
+        <column name="question_id" type="integer" size="11" required="true" phpName="QuestionId"/>
+        <column name="value" type="varchar" size="2" required="true"/>
+        <column name="text" type="varchar" size="255" required="true"/>
+
+        <foreign-key foreignTable="quiz_questions" phpName="Question">
+            <reference local="question_id" foreign="question_id"/>
+        </foreign-key>
+        
+    </table>
+    
+
+</database>

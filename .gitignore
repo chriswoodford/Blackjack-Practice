@@ -1,0 +1,38 @@
+# Eclipse files
+.settings
+.buildpath
+.project
+
+# Zend Framework files
+.zfproject.xml
+docs
+!public/docs
+
+# PHPUnit Files
+tests/phpunit.xml
+
+# OSX garbage
+.DS_Store
+
+# Propel files
+bin/build.properties
+bin/runtime-conf.xml
+bin/schema-transformed.xml
+application/configs/operation_unplugged-conf.php
+application/models/OpUnplugged/om
+application/models/OpUnplugged/map
+sql/schema.sql
+sql/sqldb.map
+
+
+# javascript files
+public/js/vendor/
+
+# CSS Related
+public/css/vendor/
+
+# cache
+data/cache
+
+# htaccess
+.htaccess

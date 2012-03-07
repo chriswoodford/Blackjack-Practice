@@ -1,0 +1,31 @@
+<?php echo $this->doctype() ?>
+<html>
+
+  <head>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#">BlackJack</a>
+          </div>
+        </div>
+      </div>
+
+      <?php echo $this->layout()->content ?>
+
+    </div>
+
+    <?php echo $this->inlineScript() ?>
+
+  </body>
+
+</html>
