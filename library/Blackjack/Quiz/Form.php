@@ -3,14 +3,22 @@
 class Blackjack_Quiz_Form
 {
 
+    /** @var Blackjack_Quiz_Form_Builder */
     protected $_builder;
 
+    /** @var string */
     protected $_action;
 
+    /** @var string */
     protected $_method;
 
+   /** @var array */
     protected $_options;
 
+    /**
+     * initialize the quiz
+     * @param Blackjack_Quiz_Form_Builder $builder
+     */
     public function __construct(Blackjack_Quiz_Form_Builder $builder)
     {
 

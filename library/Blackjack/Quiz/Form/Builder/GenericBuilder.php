@@ -4,12 +4,19 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
     implements Blackjack_Quiz_Form_Builder
 {
 
+
     protected $_form;
 
+    /** @var integer */
     protected $_numberOfQuestions;
 
+    /** @var array */
     protected $tenOptions;
 
+    /**
+     * initialize the builder
+     * @param array $tenOptions
+     */
     public function __construct(array $tenOptions = null)
     {
 
@@ -23,6 +30,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Blackjack_Quiz_Form_Builder::getQuiz()
+     */
     public function getQuiz()
     {
 
@@ -30,6 +41,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Blackjack_Quiz_Form_Builder::createQuiz()
+     */
     public function createQuiz($action, $method = 'post', array $options = array())
     {
 
@@ -53,6 +68,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Blackjack_Quiz_Form_Builder::buildQuestion()
+     */
     public function buildQuestion($question, array $options = array(), $default = null)
     {
 
@@ -72,6 +91,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Blackjack_Quiz_Form_Builder::buildDisplayGroup()
+     */
     public function buildDisplayGroup($name = 'questions')
     {
 
@@ -87,6 +110,12 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * build a question option
+     * @param unknown_type $element
+     * @param string $value
+     * @param unknown_type $option
+     */
     protected function buildOption($element, $value, $option)
     {
 
@@ -94,6 +123,11 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * build the form element
+     * @param string $name
+     * @param unknown_type $question
+     */
     protected function buildElement($name, $question)
     {
 
@@ -104,6 +138,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * get a random suit
+     * @return string
+     */
     protected function getRandomSuit()
     {
 
@@ -112,6 +150,10 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * get a random 10-value card (10, J, Q, or K)
+     * @return string
+     */
     protected function getRandom10Card()
     {
 
@@ -120,10 +162,65 @@ class Blackjack_Quiz_Form_Builder_GenericBuilder
 
     }
 
+    /**
+     * get the 10-value card options
+     * @return array
+     */
     protected function get10CardOptions()
     {
 
         return $this->tenOptions;
+
+    }
+
+    /**
+     * build the html for displaying a card
+     * @param string $value
+     */
+    protected function buildCard($value)
+    {
+
+        $suit = $this->getRandomSuit();
+
+        if ($value == 10) {
+            $value = $this->getRandom10Card();
+        }
+
+        return '<span class="playing-card ' . $suit . '-' . $value . '">'
+            . $value . '</span>';
+
+    }
+
+    /**
+     * build the html for an answer button
+     * @param Blackjack_Quiz_Question_Option $option
+     */
+    protected function buildButton(Blackjack_Quiz_Question_Option $option)
+    {
+
+        $class = 'btn';
+
+        switch ($option->getValue()) {
+
+            case 'S':
+                $class .= ' btn-danger stand';
+                break;
+
+            case 'H':
+                $class .= ' btn-success hit';
+                break;
+
+            case 'D':
+                $class .= ' btn-warning double';
+                break;
+
+            case 'P':
+                $class .= ' btn-primary split';
+                break;
+
+        }
+
+		return '<a class="' . $class . '">' . (string)$option . '</a>';
 
     }
 

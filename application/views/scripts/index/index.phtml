@@ -1,1 +1,15 @@
 <?php echo $this->form ?>
+<?php $this->inlineScript()->appendFile('/js/decision.js') ?>
+<?php $this->inlineScript()->captureStart() ?>
+
+$(function() {
+
+    var questions = new DecisionQuiz({
+        el: $('#decision-quiz')
+    });
+
+    questions.render();
+
+});
+
+<?php $this->inlineScript()->captureEnd() ?>

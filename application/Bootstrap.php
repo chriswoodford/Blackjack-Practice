@@ -25,10 +25,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
 
         $this->bootstrap('jquery');
+        $this->bootstrap('backbone');
 		$this->bootstrap('view');
 		$view = $this->getResource('view');
 
-		$view->headScript()->appendFile('/js/vendor/bootstrap.min.js');
+		//$view->headScript()->appendFile('/js/vendor/bootstrap.min.js');
 
 		$view->headLink()->appendStylesheet('/css/vendor/bootstrap.min.css');
 		$view->headLink()->appendStylesheet('/css/vendor/bootstrap-responsive.min.css');

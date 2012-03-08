@@ -10,3 +10,8 @@
 #decision-quiz input {
     display:none;
 }
+
+#decision-quiz fieldset div.clearfix {
+    text-align:center;
+    display:none;
+}

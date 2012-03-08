@@ -3,8 +3,13 @@
 class Blackjack_DecisionQuiz
 {
 
+    /** @var Blackjack_Quiz */
     protected $quiz;
 
+    /**
+     * initialize the decision quiz decorator
+     * @param unknown_type $quiz
+     */
     public function __construct(Blackjack_Quiz $quiz)
     {
 
@@ -12,6 +17,11 @@ class Blackjack_DecisionQuiz
 
     }
 
+    /**
+     * decorate the base method to add options for a
+     * decision quiz
+     * @return array
+     */
     public function getQuestions()
     {
 
