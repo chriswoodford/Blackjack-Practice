@@ -14,10 +14,7 @@ class DecideController extends Zeus_Rest_BaseController
         $strategy = $this->_getParam('strategy', 'blackjack');
 
         $decisionMaker = Blackjack_DecisionMaker::factory($strategy);
-        $result = $decisionMaker->decide($hand, $dealer);
-
-echo 'RESULT: |' . $result . '|';
-die;
+        $this->view->result = $decisionMaker->decide($hand, $dealer);
 
     }
 

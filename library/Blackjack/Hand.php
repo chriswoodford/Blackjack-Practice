@@ -104,4 +104,27 @@ class Blackjack_Hand implements Countable
 
     }
 
+    public function sixSevenEightIsPossible()
+    {
+
+        if ($this->getHardTotal() != 14
+            && $this->getHardTotal() != 15
+        ) {
+
+            return false;
+
+        }
+
+        if (($this->getHardTotal() == 14 && in_array(6, $this->cards))
+            || ($this->getHardTotal() == 15 && in_array(7, $this->cards))
+        ) {
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
 }
