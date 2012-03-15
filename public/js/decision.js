@@ -63,13 +63,15 @@ $(function(){
         	this.options.currentAction = action;
         	
 			var q = this.currentQuestion();
-			var cards = q.find('span.playing-card');
-			var hand = [
-			    this.parseCard($(cards.get(0))), 
-			    this.parseCard($(cards.get(1)))
-			];
-			var dealer = this.parseCard($(cards.get(2)));
-
+			var cards = q.find('span.playing-card').toArray();
+			var dealer = this.parseCard($(cards.pop()));
+			var hand = [];
+			var parser = this;
+			
+			$.each(cards, function(i, card) {				
+				hand.push(parser.parseCard($(card)));
+			});
+			
 			$.get(this.options.decisionUrl, {
 				strategy: this.options.decisionStrategy,
 				hand: hand.join(','),
