@@ -18,13 +18,19 @@ $(function(){
                 'stand',
                 'split',
                 'double',
+                'action',
+                'checkAnswer',
                 'nextQuestion',
-                'currentQuestion'
+                'currentQuestion',
+                'correctAnswer',
+                'incorrectAnswer'
             );          
             
-            this.questionIndex = 0;
+            this.options.questionIndex = 0;
             
             this.bind('next-question', this.nextQuestion);
+            this.bind('correct-answer', this.correctAnswer);
+            this.bind('incorrect-answer', this.incorrectAnswer);
             
         },
         
@@ -34,38 +40,81 @@ $(function(){
         },
         
         hit: function() {
-console.log('HIT');
-
-			var q = this.currentQuestion();
-console.log(q.find('span.playing-card'));
-
-			//this.trigger('next-question');
+			this.action('H');
         },
         
         stand: function() {
-console.log('STAND');
+			this.action('S');
         },
         
         split: function() {
-console.log('SPLIT');
+			this.action('P');
         },
         
         double: function() {
-console.log('DOUBLE');
+			this.action('D');
+        },
+        
+        action: function(action) {
+
+        	this.options.currentAction = action;
+        	
+			var q = this.currentQuestion();
+			var cards = q.find('span.playing-card');
+			var hand = [
+			    this.parseCard($(cards.get(0))), 
+			    this.parseCard($(cards.get(1)))
+			];
+			var dealer = this.parseCard($(cards.get(2)));
+
+			$.get(this.options.decisionUrl, {
+				strategy: this.options.decisionStrategy,
+				hand: hand.join(','),
+				dealer: dealer
+			}, this.checkAnswer, 'json');
+
+        },
+        
+        checkAnswer: function(data) {
+
+        	if (data.decision == this.options.currentAction) {
+        		this.trigger('correct-answer');
+        	} else {
+				this.trigger('incorrect-answer');
+        	}
+
+        },
+        
+        correctAnswer: function() {
+console.log('CORRECT');
+			this.trigger('next-question');
+        },
+        
+        incorrectAnswer: function() {
+console.log('INCORRECT');
+        	this.trigger('next-question');
         },
         
         nextQuestion: function() {
-        	
-        	this.currentQuestion().hide();
-        	this.questionIndex++;
-        	this.render();
-        	
+
+			this.currentQuestion().hide();
+			this.options.questionIndex++;
+			this.render();
+
         },
         
         currentQuestion: function() {
+
+        	return $(this.$('div.clearfix').get(this.options.questionIndex));
+
+        },
+        
+        parseCard: function(elt) {
         	
-        	return $(this.$('div.clearfix').get(this.questionIndex));
-        	
+        	matches = elt.attr('class')
+        		.match(/(hearts|spades|clubs|diamonds)-(.)/);
+			return matches[2];
+			
         }
         
     });
