@@ -1,6 +1,6 @@
 <?php
 
-class DecideController extends Zeus_Rest_BaseController
+class DecideController extends Zeus_Rest_RestfulController
 {
 
     public function indexAction()

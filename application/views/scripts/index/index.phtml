@@ -5,7 +5,9 @@
 $(function() {
 
     var questions = new DecisionQuiz({
-        el: $('#decision-quiz')
+        el: $('#decision-quiz'),
+        decisionUrl: '<?php echo $this->url(array(), 'decide') ?>',
+        decisionStrategy: 'spanish21'
     });
 
     questions.render();
