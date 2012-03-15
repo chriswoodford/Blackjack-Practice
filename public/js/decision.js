@@ -23,14 +23,17 @@ $(function(){
                 'nextQuestion',
                 'currentQuestion',
                 'correctAnswer',
-                'incorrectAnswer'
+                'incorrectAnswer',
+                'updateScore'
             );          
             
             this.options.questionIndex = 0;
+            this.options.correctResponses = 0;
             
             this.bind('next-question', this.nextQuestion);
             this.bind('correct-answer', this.correctAnswer);
             this.bind('incorrect-answer', this.incorrectAnswer);
+            this.bind('update-score', this.updateScore);
             
         },
         
@@ -77,6 +80,8 @@ $(function(){
         
         checkAnswer: function(data) {
 
+        	this.options.currentAnswer = data.decision;
+        	
         	if (data.decision == this.options.currentAction) {
         		this.trigger('correct-answer');
         	} else {
@@ -86,21 +91,56 @@ $(function(){
         },
         
         correctAnswer: function() {
-console.log('CORRECT');
-			this.trigger('next-question');
+
+        	this.options.correctResponses++;
+        	
+        	var question = this;
+			var q = this.currentQuestion();
+			
+			q.empty()
+				.css('background', 'green')
+				.css('height', 70)
+				.css('padding-top', 35)
+				.html('<h1 style="color:white;">CORRECT</h1>');
+
+			q.fadeOut(2000, function() {
+				question.trigger('next-question');
+			});
+			
         },
         
         incorrectAnswer: function() {
-console.log('INCORRECT');
-        	this.trigger('next-question');
+
+        	var question = this;
+			var q = this.currentQuestion();
+			q.empty()
+				.css('background', 'red')
+				.css('height', 85)
+				.css('padding-top', 20);
+			
+			q.append('<h1 style="color:white;">INCORRECT</h1>')
+				.append('<h3>CORRECT: ' + this.options.currentAnswer + '</h3>');
+
+			q.fadeOut(2500, function() {
+				question.trigger('next-question');
+			});
+		
         },
         
         nextQuestion: function() {
-
+        	
 			this.currentQuestion().hide();
 			this.options.questionIndex++;
+			this.trigger('update-score');
 			this.render();
-
+			
+        },
+        
+        updateScore: function() {
+        
+        	this.$('.score .total').text(this.options.questionIndex);
+    		this.$('.score .correct').text(this.options.correctResponses);
+        	
         },
         
         currentQuestion: function() {

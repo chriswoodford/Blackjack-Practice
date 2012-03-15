@@ -17,7 +17,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$this->bootstrap('view');
 		$view = $this->getResource('view');
 
-		$view->headScript()->appendFile('/js/vendor/jquery-1.6.min.js');
+		$view->headScript()->appendFile('/js/vendor/jquery-1.7.1.min.js');
 
     }
 
@@ -29,12 +29,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$this->bootstrap('view');
 		$view = $this->getResource('view');
 
-		//$view->headScript()->appendFile('/js/vendor/bootstrap.min.js');
+		$view->headScript()->appendFile('/js/vendor/bootstrap.min.js');
 
 		$view->headLink()->appendStylesheet('/css/vendor/bootstrap.min.css');
 		$view->headLink()->appendStylesheet('/css/vendor/bootstrap-responsive.min.css');
 
 		$view->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0');
+
+		$view->inlineScript()->captureStart();
+?>
+
+$(function() {
+
+    $('.dropdown-toggle').dropdown();
+
+});
+
+<?php
+        $view->inlineScript()->captureEnd();
 
     }
 

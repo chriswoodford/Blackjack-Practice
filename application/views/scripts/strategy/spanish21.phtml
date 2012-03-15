@@ -1,0 +1,22 @@
+<div id="decision-quiz">
+  <div class="score">
+    <span class="correct">0</span> / <span class="total">0</span>
+  </div>
+  <?php echo $this->form ?>
+</div>
+<?php $this->inlineScript()->appendFile('/js/decision.js') ?>
+<?php $this->inlineScript()->captureStart() ?>
+
+$(function() {
+
+    var questions = new DecisionQuiz({
+        el: $('#decision-quiz'),
+        decisionUrl: '<?php echo $this->url(array(), 'decide') ?>',
+        decisionStrategy: 'spanish21'
+    });
+
+    questions.render();
+
+});
+
+<?php $this->inlineScript()->captureEnd() ?>

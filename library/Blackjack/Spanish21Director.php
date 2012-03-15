@@ -18,10 +18,15 @@ class Blackjack_Spanish21Director
         );
 
         $form = new Blackjack_Quiz_Form($builder);
-        $form->setOption('id', 'decision-quiz');
+        $form->setOption('id', 'decision-quiz-form');
 
         $quiz = new Blackjack_DecisionQuiz($quiz);
-        return $form->build($quiz->getQuestions());
+
+        // shuffle the questions
+        $questions = $quiz->getQuestions();
+        shuffle($questions);
+
+        return $form->build($questions);
 
     }
 

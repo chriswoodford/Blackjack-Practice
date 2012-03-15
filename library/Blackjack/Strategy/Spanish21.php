@@ -21,8 +21,14 @@ class Blackjack_Strategy_Spanish21 implements Blackjack_Strategy
 
     }
 
-    public function decide(Blackjack_Hand $hand, $dealer)
+    public function decide(Blackjack_Hand $hand, Blackjack_Hand $dealer)
     {
+
+        $dealer = $dealer->getHardTotal();
+
+        if ($dealer == 1) {
+            $dealer = 'A';
+        }
 
         if ($hand->isAPair()) {
 

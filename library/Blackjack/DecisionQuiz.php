@@ -25,6 +25,8 @@ class Blackjack_DecisionQuiz
     public function getQuestions()
     {
 
+        $questions = array();
+
         foreach ($this->quiz->getQuestions() as $question) {
 
             $question->addOption('S', 'Stand');
@@ -32,9 +34,11 @@ class Blackjack_DecisionQuiz
             $question->addOption('P', 'Split');
             $question->addOption('D', 'Double Down');
 
+            $questions[] = $question;
+
         }
 
-        return $this->quiz->getQuestions();
+        return $questions;
 
     }
 

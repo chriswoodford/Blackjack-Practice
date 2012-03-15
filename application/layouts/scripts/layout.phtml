@@ -10,18 +10,49 @@
 
   <body>
 
-    <div class="container">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
 
-      <div class="navbar">
-        <div class="navbar-inner">
-          <div class="container">
-            <a class="brand" href="#">Blackjack Basic Strategy</a>
+          <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <a class="brand" href="">Blackjack Practice</a>
+
+          <div class="nav-collapse">
+
+          <ul class="nav">
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Strategy <b class="caret"><!--  --></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="<?php echo $this->url(array('controller' => 'strategy'), 'default') ?>">Classic</a></li>
+                <li><a href="<?php echo $this->url(array('controller' => 'strategy', 'action' => 'spanish21'), 'default') ?>">Spanish 21</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                Counting <b class="caret"><!--  --></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Classic</a></li>
+                <li><a href="#">Spanish 21</a></li>
+              </ul>
+            </li>
+          </ul>
+
           </div>
+
         </div>
       </div>
+    </div>
 
+    <div class="container">
       <?php echo $this->layout()->content ?>
-
     </div>
 
     <?php echo $this->inlineScript() ?>

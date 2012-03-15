@@ -59,7 +59,7 @@ class Blackjack_Quiz_Form
         );
 
         foreach ($questions as $question) {
-            $this->_builder->buildQuestion($question, $question->getOptions(), 3);
+            $this->_builder->buildQuestion($question, $question->getOptions());
         }
 
         $this->_builder->buildDisplayGroup();

@@ -10,7 +10,7 @@ class DecideController extends Zeus_Rest_RestfulController
             explode(',', $this->_getParam('hand'))
         );
 
-        $dealer = $this->_getParam('dealer');
+        $dealer = new Blackjack_Hand($this->_getParam('dealer'));
         $strategy = $this->_getParam('strategy', 'blackjack');
 
         $decisionMaker = Blackjack_DecisionMaker::factory($strategy);

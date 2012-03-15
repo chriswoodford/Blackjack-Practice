@@ -6,7 +6,7 @@ require 'Bj/om/BaseQuizPeer.php';
 /**
  * Skeleton subclass for performing query and update operations on the 'quizes' table.
  *
- * 
+ *
  *
  * You should add additional methods to this class to meet the
  * application requirements.  This class will only be generated as
@@ -14,6 +14,7 @@ require 'Bj/om/BaseQuizPeer.php';
  *
  * @package    Bj
  */
-class QuizPeer extends BaseQuizPeer {
+class QuizPeer extends BaseQuizPeer
+{
 
 } // QuizPeer
